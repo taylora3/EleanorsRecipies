@@ -804,20 +804,6 @@ export default function App() {
     maxCookTime: 120,
   });
 
-  useEffect(() => {
-    fetch("/api/recipes")
-      .then((r) => r.json())
-      .then((data: Recipe[]) => {
-        const loaded = data.length > 0 ? data : recipeDatabase;
-        setAllRecipes(loaded);
-        setRecipes(loaded);
-      })
-      .catch(() => {
-        setAllRecipes(recipeDatabase);
-        setRecipes(recipeDatabase);
-      });
-  }, []);
-
   const saveRecipes = (updated: Recipe[]) => {
     fetch("/api/recipes", {
       method: "POST",
@@ -825,6 +811,22 @@ export default function App() {
       body: JSON.stringify(updated),
     });
   };
+
+  useEffect(() => {
+    fetch("/api/recipes")
+      .then((r) => r.json())
+      .then((data: Recipe[]) => {
+        const isFirstLoad = data.length === 0;
+        const loaded = isFirstLoad ? recipeDatabase : data;
+        setAllRecipes(loaded);
+        setRecipes(loaded);
+        if (isFirstLoad) saveRecipes(loaded);
+      })
+      .catch(() => {
+        setAllRecipes(recipeDatabase);
+        setRecipes(recipeDatabase);
+      });
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
