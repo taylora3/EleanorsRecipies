@@ -932,6 +932,7 @@ export default function App() {
     setEditingRecipe(recipe);
     setShowAddForm(true);
     setSelectedRecipe(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleAddRecipe = () => {
