@@ -43,6 +43,7 @@ const defaultImages = [
   "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80",
   "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&q=80",
   "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80",
+  "https://www.berlyskitchen.com/wp-content/uploads/2020/04/Eggs-in-a-Basket-6.webp"
 ];
 
 const recipeDatabase: Recipe[] = [
