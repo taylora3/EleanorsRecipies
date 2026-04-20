@@ -36,7 +36,7 @@ const defaultImages = [
   "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80",
   "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
   "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=80",
-  "https://images.unsplash.com/photo-1603046891726-36bfd957207d?w=800&q=80",
+  "https://static.vecteezy.com/system/resources/thumbnails/002/680/262/small_2x/homemade-banana-bread-sliced-photo.jpg",
   "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=800&q=80",
   "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=800&q=80",
   "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80",
