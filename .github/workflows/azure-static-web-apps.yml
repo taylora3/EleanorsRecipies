@@ -26,8 +26,12 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: pnpm install
+
+      - name: Install API dependencies
+        run: npm install
+        working-directory: api
 
       - name: Build
         run: pnpm run build
@@ -39,6 +43,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
           app_location: 'dist'
+          api_location: 'api'
           output_location: ''
           skip_app_build: true
 

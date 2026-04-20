@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Search,
   BookOpen,
@@ -788,10 +788,8 @@ const recipeDatabase: Recipe[] = [
 
 export default function App() {
   const [searchInput, setSearchInput] = useState("");
-  const [recipes, setRecipes] =
-    useState<Recipe[]>(recipeDatabase);
-  const [allRecipes, setAllRecipes] =
-    useState<Recipe[]>(recipeDatabase);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedRecipe, setSelectedRecipe] =
     useState<Recipe | null>(null);
@@ -805,6 +803,28 @@ export default function App() {
     dietary: [] as string[],
     maxCookTime: 120,
   });
+
+  useEffect(() => {
+    fetch("/api/recipes")
+      .then((r) => r.json())
+      .then((data: Recipe[]) => {
+        const loaded = data.length > 0 ? data : recipeDatabase;
+        setAllRecipes(loaded);
+        setRecipes(loaded);
+      })
+      .catch(() => {
+        setAllRecipes(recipeDatabase);
+        setRecipes(recipeDatabase);
+      });
+  }, []);
+
+  const saveRecipes = (updated: Recipe[]) => {
+    fetch("/api/recipes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    });
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -969,6 +989,7 @@ export default function App() {
     const updatedRecipes = [...allRecipes, recipe];
     setAllRecipes(updatedRecipes);
     setRecipes(updatedRecipes);
+    saveRecipes(updatedRecipes);
     setShowAddForm(false);
     resetForm();
   };
@@ -1010,6 +1031,7 @@ export default function App() {
     );
     setAllRecipes(updatedRecipes);
     setRecipes(updatedRecipes);
+    saveRecipes(updatedRecipes);
     setShowAddForm(false);
     resetForm();
   };
